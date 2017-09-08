@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Posts</title>
+        <script src="qmnt/jquery/jquery.min.1.11.3.js"></script>
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    $('#qmnt-show').on('click', function(){
+                        $('#qmnt').toggle();
+                        $('#qmnt').css("height",document.getElementById('qmnt').contentDocument.body.scrollHeight +'px');
+                        $('#qmnt-show').html("Hide Comment");
+                    });
+                    $
+                }
+            );
+        </script>
+    </head>
+    <body>
+        <center style="padding:5px;">
+                <h2>My blog</h2>
+                <p>3 Sept, 2017 | 13:45</p>
+                <p>Content of the blog.</p>
+                <p style="width:70%;">
+                    An exhausting theology bores behind the hollow workload. The negotiable spectacular disguises the explanatory nonsense. The art reacts! A character fleshes the art. The drivel migrates past a portrayed exercise. Across a craft flies the leaded duck. The music unloads a folding scroll. The knight smells like any wound. Why can't the individual breathe? The decline inherits the listening twin. The caffeine dominates its intermittent continental behind the curriculum. A tube sneaks near a shape. The eagle bobs? The lunatic lark puzzles underneath an atheist.
+                </p>
+            <button id="qmnt-show">Show Comment</button>
+            <br>
+            <iframe src="qmnt/index.html" style="width:70%;border:0px;display:none;" id="qmnt"></iframe>
+        </center>
+    </body>
+</html>

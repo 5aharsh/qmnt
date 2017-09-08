@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Comments</title>
+		<link rel="stylesheet" href="style.css"/>
+        <script src="jquery/jquery.min.1.11.3.js"></script>
+		<!--<script src="comment.js"></script>-->
+		<script src="script.js"></script>
+	</head>
+	<body onload="call_name()">
+		<div id="commenting">
+			<form id="comment">
+				<textarea id="comment-con" onkeydown="auto_grow(this)" onkeyup="saveMessage(this.value)" required></textarea><br>
+				<small>*minimum message length 5</small> &nbsp;  &nbsp; 
+				<input type="text" id="name" placeholder="Name" onkeyup="saveName(this.value)" required>
+				<input type="email" id="email" placeholder="Email" onkeyup="saveEmail(this.value)">
+				<input type="text" id="website" placeholder="Website" onkeyup="saveWeb(this.value)">
+				<input type="button" id="cmnt-btn" value="Submit">
+			</form>
+		</div>
+		<div id="comment-section">
+		<script>
+			function postComment(posts){
+				post = posts["1"];
+				for(var i=0;i<post.length;i++){
+					$('#comment-section').prepend("<details open><summary><a href='"+post[i]["website"]+"'>"+ post[i]["username"] +"</a> | "+ post[i]["date"] +"</summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
+				}
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var posts = JSON.parse(this.responseText);
+					postComment(posts);
+				}
+			};
+			xhr.open("GET", "comment.json", true);
+			xhr.send();
+		</script>
+		</div>
+	</body>
+</html>

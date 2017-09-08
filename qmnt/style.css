@@ -1,0 +1,100 @@
+body{
+	text-align:center;
+}
+
+#commenting{
+	padding:20px;
+	width:90%;
+	text-align:right;
+	margin:0 auto;
+}
+
+#commenting input, #commenting textarea{
+	font-family:arial;
+	font-size:14px;
+	padding:5px;
+	border:2px solid #404040;
+	border-radius:5px;
+}
+
+#commenting input[type=text], input[type=email] {
+	width:20%;
+}
+
+#commenting input[type=submit], #commenting input[type=button]{
+	width:10%;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+#commenting textarea{
+	width:100%;
+    resize: none;
+    overflow: hidden;
+	min-height:100px;
+}
+
+#commenting textarea:focus, #commenting input:focus{
+	outline:none;
+}
+
+#comment-section{
+	width:90%;
+	border:2px solid #404040;
+	margin:0 auto;
+	text-align:left;
+	padding:10px;
+}
+
+details{
+	margin-bottom:10px;
+	padding:5px;
+	border:2px solid #404040;
+}
+
+details summary{
+	outline:none;
+	cursor:pointer;
+	padding:5px;
+}
+
+details summary::-webkit-details-marker{
+	display:none;
+}
+
+details summary:after{
+	background: #00ff99;
+	border-radius: 50%;
+	content: "+";
+	color: #fff;
+	float: left;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: -5px 10px 0 0;
+	padding: 0;
+	text-align: center;
+	width: 30px;
+}
+
+details[open] summary:after {
+	content: "-";
+	background: red;
+}
+
+details blockquote{
+	margin-left:45px;/*
+	animation-name: invisiblyGrowFontSize, fadeIn;
+	animation-duration: 500ms, 200ms;
+	animation-delay: 0ms, 500ms;*/
+}
+
+@keyframes invisiblyGrowFontSize {
+	0% {
+	font-size: 0;
+	opacity: 0;
+	}
+	100% {
+	font-size: 1em;
+	opacity: 0;
+	}
+}
