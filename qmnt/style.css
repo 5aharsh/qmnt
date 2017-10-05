@@ -2,60 +2,95 @@ body{
 	text-align:center;
 }
 
-#commenting{
-	padding:20px;
+#qmnting{
 	width:90%;
-	text-align:right;
-	margin:0 auto;
+	border:2px solid #ccc;
+	background:#fff;
+	border-radius:5px;
+	padding:10px 0 0 0;
+	margin:10px auto;
 }
 
-#commenting input, #commenting textarea{
+#qmnting input, #qmnting textarea{
+	border:0;
 	font-family:arial;
 	font-size:14px;
 	padding:5px;
-	border:2px solid #404040;
-	border-radius:5px;
 }
 
-#commenting input[type=text], input[type=email] {
-	width:20%;
+
+#qmnting #qmnt-box-bottom{
+	padding:10px 10px 10px 10px;
+	text-align:right;
+	background:#ebebeb;
 }
 
-#commenting input[type=submit], #commenting input[type=button]{
-	width:10%;
+#qmnt-form{
+	margin:0;
+}
+
+#qmnting input[type=text], #qmnting input[type=email] {
+	width:32.5%;
+	margin:auto;
+	border-bottom:2px solid #bfbfbf;
+	transition: border 0.3s ease;
+	display: inline-block;
+	position:relative;
+}
+
+#qmnting input[type=text]:focus, #qmnting input[type=email]:focus{
+	border-bottom:2px solid #8c8c8c;
+}
+
+#qmnting input[type=submit], #qmnting input[type=button]{
 	cursor:pointer;
 	font-weight:bold;
+	color:#fff;
+	padding:10px 20px 10px 20px;
+	border-radius:5px;
+	background:#00cc66;
 }
 
-#commenting textarea{
-	width:100%;
+#qmnting textarea{
+	width:99%;
     resize: none;
+	margin:10px 0 0 0;
     overflow: hidden;
-	min-height:100px;
+	min-height:50px;
 }
 
-#commenting textarea:focus, #commenting input:focus{
+#qmnting textarea:focus, #qmnting input:focus{
 	outline:none;
 }
 
-#comment-section{
+#qmnt-section{
 	width:90%;
-	border:2px solid #404040;
 	margin:0 auto;
 	text-align:left;
 	padding:10px;
 }
 
 details{
+	background:#eaeaea;
 	margin-bottom:10px;
 	padding:5px;
-	border:2px solid #404040;
+	border-radius:5px;
 }
 
 details summary{
+	color:#4d4d4d;
 	outline:none;
-	cursor:pointer;
+	cursor:default;
 	padding:5px;
+}
+
+details summary .qmnt-user, details summary .qmnt-user a{
+	font-weight: bold;
+	color:#1a1a1a;
+}
+
+details summary .qmnt-date{
+	font-size:12px;
 }
 
 details summary::-webkit-details-marker{
@@ -63,7 +98,7 @@ details summary::-webkit-details-marker{
 }
 
 details summary:after{
-	background: #00ff99;
+	background: rgba(0, 255, 153, 0.5);
 	border-radius: 50%;
 	content: "+";
 	color: #fff;
@@ -78,23 +113,10 @@ details summary:after{
 
 details[open] summary:after {
 	content: "-";
-	background: red;
+	background:rgba(255,0,0,0.15);
 }
 
 details blockquote{
-	margin-left:45px;/*
-	animation-name: invisiblyGrowFontSize, fadeIn;
-	animation-duration: 500ms, 200ms;
-	animation-delay: 0ms, 500ms;*/
-}
-
-@keyframes invisiblyGrowFontSize {
-	0% {
-	font-size: 0;
-	opacity: 0;
-	}
-	100% {
-	font-size: 1em;
-	opacity: 0;
-	}
+	margin-left:45px;
+	color:#666;
 }

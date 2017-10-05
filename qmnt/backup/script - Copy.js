@@ -95,13 +95,18 @@ $(document).ready(function(){
                     localStorage.setItem("user_message", "");
 
                 }else{
-                    $("#comment-con").css("background", "#ff704d");
+                    $("#commenting").css("background", "#ff704d");
+                    $("#qmnt-box-bottom").css("background", "#ff704d");
                 }
-                $("#comment-con").click(
-                    function(){
-                        $("#comment-con").css("background", "#fff");
-                    }
-                );
+
+                var resetQmnt = function() {
+                    $("#commenting").css("background", "#fff");
+                    $("#qmnt-box-bottom").css("background", "#ebebeb");
+                }
+                $("#comment-con").click(resetQmnt);
+                $("#name").click(resetQmnt);
+                $("#email").click(resetQmnt);
+                $("#website").click(resetQmnt);
             }
         );
     }

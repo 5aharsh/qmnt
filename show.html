@@ -2,18 +2,8 @@
     <head>
         <title>Posts</title>
         <script src="qmnt/jquery/jquery.min.1.11.3.js"></script>
-        <script type="text/javascript">
-            $(document).ready(
-                function(){
-                    $('#qmnt-show').on('click', function(){
-                        $('#qmnt').toggle();
-                        $('#qmnt').css("height",document.getElementById('qmnt').contentDocument.body.scrollHeight +'px');
-                        $('#qmnt-show').html("Hide Comment");
-                    });
-                    $
-                }
-            );
-        </script>
+        <script src="qmnt/script/page.js"></script>
+        <link rel="stylesheet" href="website.css"/>
     </head>
     <body>
         <center style="padding:5px;">
@@ -25,7 +15,8 @@
                 </p>
             <button id="qmnt-show">Show Comment</button>
             <br>
-            <iframe src="qmnt/index.html" style="width:70%;border:0px;display:none;" id="qmnt"></iframe>
+            <div id="qmnt-list"></div>
         </center>
+
     </body>
 </html>
