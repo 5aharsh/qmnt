@@ -15,7 +15,6 @@ function call_name(){
         var username = localStorage.getItem("user_name");
         var usermail = localStorage.getItem("user_mail");
         var usersite = localStorage.getItem("user_site");
-        var message = localStorage.getItem("user_message");
         if(username!=null&&username!="undefined"&&username!=""){
             document.getElementById("qmnt-name").value=username;
         }
@@ -29,8 +28,6 @@ function call_name(){
             document.getElementById("qmnt-email").value=usermail;
         if(usersite!=null&&usersite!="undefined")
             document.getElementById("qmnt-website").value=usersite;
-
-        document.getElementById("qmnt-con").value=message;
     }else{
         alert("Browser is too old! Please update to a newer version...");
     }
@@ -46,10 +43,6 @@ function saveEmail(email){
 
 function saveWeb(website){
     localStorage.setItem("user_site", website);
-}
-
-function saveMessage(message){
-    localStorage.setItem("user_message", message);
 }
 
 function ip_call(){
@@ -97,7 +90,6 @@ $(document).ready(
                         $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'>"+ name +"</span> | <span class='qmnt-date'>"+ date +"</span></summary><blockquote>"+ comment +"</blockquote></details>");
                     }
                     $('#qmnt-con').val("");
-                    localStorage.setItem("user_message", "");
 
                 }else{
                     $("#qmnting").css("background", "#ff704d");
