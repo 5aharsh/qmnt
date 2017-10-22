@@ -5,13 +5,13 @@
         <link rel="stylesheet" href="qmnt/style.css"/>
         <script src="qmnt/script/qmnt.js"></script>
 	</head>
-	<body style="display:none;">
+	<body style="font-family:arial;">
 		<div id="qmnting">
-			<form id="qmnt-form">
-				<input type="text" id="qmnt-name" placeholder="Name" onkeyup="saveName(this.value)">
-				<input type="email" id="qmnt-email" placeholder="Email" onkeyup="saveEmail(this.value)">
-				<input type="text" id="qmnt-website" placeholder="Website" onkeyup="saveWeb(this.value)">
-				<textarea id="qmnt-con" onkeydown="auto_grow(this)" placeholder="Describe your views in 5 or more letters..."></textarea><br>
+			<form id="qmnt-form" method="GET" action="submit.php">
+				<input type="text" id="qmnt-name" placeholder="Name" onkeyup="saveName(this.value)" name="username">
+				<input type="email" id="qmnt-email" placeholder="Email" onkeyup="saveEmail(this.value)" name="email">
+				<input type="text" id="qmnt-website" placeholder="Website" onkeyup="saveWeb(this.value)" name="website">
+				<textarea name="message" id="qmnt-con" onkeydown="auto_grow(this)" placeholder="Describe your views in 5 or more letters..."></textarea><br>
 				<div id="qmnt-box-bottom">
 					<input type="submit" id="cmnt-btn" value="Submit">
 				</div>
@@ -20,7 +20,8 @@
 		<div id="qmnt-section">
 		<script>
 			function postComment(posts){
-				post = posts["1"];
+				var page = window.location.href;
+				post = posts[page];
 				for(var i=0;i<post.length;i++){
 					if(+post[i]["website"]!="")
 						$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\"><a href=\""+post[i]["website"]+"\">"+ post[i]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
@@ -37,6 +38,7 @@
 			};
 			xhr.open("GET", "qmnt/comment.json", true);
 			xhr.send();
+
 		</script>
 		</div>
 	</body>

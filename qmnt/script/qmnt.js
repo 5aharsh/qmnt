@@ -5,6 +5,17 @@ function auto_grow(element) {
         element.style.height = (element.scrollHeight)+"px";
 }
 
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 function toTitle(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
@@ -69,7 +80,7 @@ function ip_call(){
 $(document).ready(
     function(){
         call_name();
-        $('#qmnt-form').submit(function(){
+        $('#qmnt-form').submit(function(e){
                 var comment = $('#qmnt-con').val();
                 var name = $('#qmnt-name').val();
                 name = toTitle(name);
@@ -84,10 +95,10 @@ $(document).ready(
                 comment = comment.trim();
                 if(comment!="" && comment.length>=5 && name!=""){
                     if($('#qmnt-website').val()!=""){
-                        $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'><a href='"+website+"'>"+ name +"</a></span> | <span class='qmnt-date'>"+ date +"</span> </summary><blockquote>"+ comment +"</blockquote></details>");
+                        $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'><a href='"+escapeHtml(website)+"'>"+ escapeHtml(name) +"</a></span> | <span class='qmnt-date'>"+ escapeHtml(date) +"</span> </summary><blockquote>"+ escapeHtml(comment) +"</blockquote></details>");
                     }
                     else{
-                        $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'>"+ name +"</span> | <span class='qmnt-date'>"+ date +"</span></summary><blockquote>"+ comment +"</blockquote></details>");
+                        $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'>"+ escapeHtml(name) +"</span> | <span class='qmnt-date'>"+ escapeHtml(date) +"</span></summary><blockquote>"+ escapeHtml(comment) +"</blockquote></details>");
                     }
                     $('#qmnt-con').val("");
 
@@ -104,6 +115,20 @@ $(document).ready(
                 $("#qmnt-name").click(resetQmnt);
                 $("#qmnt-email").click(resetQmnt);
                 $("#qmnt-website").click(resetQmnt);
+
+                e.preventDefault();
+                var now = new Date();
+                var date = months[now.getMonth()-1]+" "+now.getDate()+" "+now.getFullYear();
+    			var page = window.location.href;
+                var formData = "username="+name+"&email="+email+"&website="+website+"&message="+comment+"&address="+page+"&date="+date;
+                $.ajax({
+                    url:'qmnt/submit.php',
+                    type:'get',
+                    data: formData,
+                    success:function(){
+                        console.log("Success.");
+                    }
+                });
                 return false;
             }
         );
