@@ -20,14 +20,15 @@
 		<div id="qmnt-section">
 		<script>
 			function postComment(posts){
-				var page = window.location.href;
+				var page = window.location.pathname;
 				post = posts[page];
-				for(var i=0;i<post.length;i++){
-					if(+post[i]["website"]!="")
-						$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\"><a href=\""+post[i]["website"]+"\">"+ post[i]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
-					else
-						$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\">"+ post[i]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
-				}
+				if(post!=undefined)
+					for(var i=0;i<post.length;i++){
+						if(post[i]["website"]!="")
+							$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\"><a href=\""+post[i]["website"]+"\">"+ post[i]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
+						else
+							$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\">"+ post[i]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
+					}
 			}
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
@@ -36,7 +37,8 @@
 					postComment(posts);
 				}
 			};
-			xhr.open("GET", "qmnt/comment.json", true);
+			var reqhash = "qmnt/comment.json?hash="+Math.floor(Math.random()*1000000000000000);
+			xhr.open("GET", reqhash, true);
 			xhr.send();
 
 		</script>

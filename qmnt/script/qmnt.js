@@ -1,4 +1,3 @@
-
 function auto_grow(element) {
     element.style.height = "5px";
     if(element.value!="")
@@ -13,19 +12,26 @@ function escapeHtml(text) {
         '"': '&quot;',
         "'": '&#039;'
     };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    return text.replace(/[&<>"']/g, function(m) {return map[m];});
 }
 
 function toTitle(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
+function getFingerprint(){
+    var fp = new Fingerprint2().get(function(result, components){
+        saveFingerprint(result);
+        console.log(components);
+    });
+}
+
 function call_name(){
     if (typeof(Storage) !== "undefined") {
-        var userip = localStorage.getItem("user_ip");
-        var username = localStorage.getItem("user_name");
-        var usermail = localStorage.getItem("user_mail");
-        var usersite = localStorage.getItem("user_site");
+        var userip = localStorage.getItem("qmnt_user_ip");
+        var username = localStorage.getItem("qmnt_user_name");
+        var usermail = localStorage.getItem("qmnt_user_mail");
+        var usersite = localStorage.getItem("qmnt_user_site");
         if(username!=null&&username!="undefined"&&username!=""){
             document.getElementById("qmnt-name").value=username;
         }
@@ -45,15 +51,19 @@ function call_name(){
 }
 
 function saveName(name){
-    localStorage.setItem("user_name", name);
+    localStorage.setItem("qmnt_user_name", name);
+}
+
+function saveFingerprint(identity){
+    localStorage.setItem("qmnt_fingerprint", identity);
 }
 
 function saveEmail(email){
-    localStorage.setItem("user_mail", email);
+    localStorage.setItem("qmnt_user_mail", email);
 }
 
 function saveWeb(website){
-    localStorage.setItem("user_site", website);
+    localStorage.setItem("qmnt_user_site", website);
 }
 
 function ip_call(){
@@ -65,11 +75,11 @@ function ip_call(){
             if(xmlhttp.status == 200) {
                 var obj = JSON.parse(xmlhttp.responseText);
                 ip = obj.ip;
-                localStorage.setItem("user_ip", ip);
+                localStorage.setItem("qmnt_user_ip", ip);
                 document.getElementById("qmnt-name").value=ip;
              }
              else{
-                 alert("1");
+                 alert("Device not connected to Internet! Please Try Again.");
              }
         }
     };
@@ -79,6 +89,8 @@ function ip_call(){
 
 $(document).ready(
     function(){
+        if(localStorage.getItem("qmnt_fingerprint") === null)
+            getFingerprint();
         call_name();
         $('#qmnt-form').submit(function(e){
                 var comment = $('#qmnt-con').val();
@@ -92,14 +104,30 @@ $(document).ready(
                 var months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 var now = new Date();
                 var date = months[now.getMonth()-1]+" "+now.getDate()+" "+now.getFullYear();
+                var fprint = localStorage.getItem("qmnt_fingerprint");
                 comment = comment.trim();
                 if(comment!="" && comment.length>=5 && name!=""){
+                    e.preventDefault();
+                    var now = new Date();
+                    var date = months[now.getMonth()-1]+" "+now.getDate()+" "+now.getFullYear();
+        			var page = window.location.pathname;
+
                     if($('#qmnt-website').val()!=""){
                         $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'><a href='"+escapeHtml(website)+"'>"+ escapeHtml(name) +"</a></span> | <span class='qmnt-date'>"+ escapeHtml(date) +"</span> </summary><blockquote>"+ escapeHtml(comment) +"</blockquote></details>");
                     }
                     else{
                         $('#qmnt-section').prepend("<details open><summary><span class='qmnt-user'>"+ escapeHtml(name) +"</span> | <span class='qmnt-date'>"+ escapeHtml(date) +"</span></summary><blockquote>"+ escapeHtml(comment) +"</blockquote></details>");
+                        website="";
                     }
+                    var formData = "username="+name+"&email="+email+"&website="+website+"&message="+comment+"&address="+page+"&date="+date+"&fingerprint="+fprint;
+                    $.ajax({
+                        url:'qmnt/submit.php',
+                        type:'get',
+                        data: formData,
+                        success:function(){
+                                    console.log("Success.");
+                                }
+                    });
                     $('#qmnt-con').val("");
 
                 }else{
@@ -116,19 +144,6 @@ $(document).ready(
                 $("#qmnt-email").click(resetQmnt);
                 $("#qmnt-website").click(resetQmnt);
 
-                e.preventDefault();
-                var now = new Date();
-                var date = months[now.getMonth()-1]+" "+now.getDate()+" "+now.getFullYear();
-    			var page = window.location.href;
-                var formData = "username="+name+"&email="+email+"&website="+website+"&message="+comment+"&address="+page+"&date="+date;
-                $.ajax({
-                    url:'qmnt/submit.php',
-                    type:'get',
-                    data: formData,
-                    success:function(){
-                        console.log("Success.");
-                    }
-                });
                 return false;
             }
         );
