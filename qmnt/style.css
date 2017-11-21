@@ -30,7 +30,7 @@ body{
 }
 
 #qmnting input[type=text], #qmnting input[type=email] {
-	width:32.5%;
+	width:30%;
 	margin:auto;
 	border-bottom:2px solid #bfbfbf;
 	transition: border 0.3s ease;
@@ -52,10 +52,10 @@ body{
 }
 
 #qmnting textarea{
-	width:99%;
-    resize: none;
+	width:95%;
+  resize: none;
 	margin:10px 0 0 0;
-    overflow: hidden;
+  overflow: hidden;
 	min-height:50px;
 }
 
@@ -68,6 +68,7 @@ body{
 	margin:0 auto;
 	text-align:left;
 	padding:10px;
+	counter-reset: section;
 }
 
 details{
@@ -78,6 +79,7 @@ details{
 }
 
 details summary{
+    counter-increment: section;
 	color:#4d4d4d;
 	outline:none;
 	cursor:default;
@@ -100,23 +102,37 @@ details summary::-webkit-details-marker{
 details summary:after{
 	background: rgba(0, 255, 153, 0.5);
 	border-radius: 50%;
-	content: "+";
+	font-family:courier;
+	content: counter(section);
 	color: #fff;
 	float: left;
-	font-size: 1.5em;
+	font-size: 1em;
 	font-weight: bold;
 	margin: -5px 10px 0 0;
-	padding: 0;
+	padding: 5px 0 5px 0;
 	text-align: center;
 	width: 30px;
 }
 
 details[open] summary:after {
-	content: "-";
+	content: counter(section);
 	background:rgba(255,0,0,0.15);
 }
 
 details blockquote{
 	margin-left:45px;
 	color:#666;
+}
+
+#qmnt-rep-button{
+	cursor:pointer;
+	color:#666;
+	font-size:13px;
+	font-weight:bold;
+}
+
+#qmnt-qmnid{
+	font-size:12px;
+	opacity:0.5;
+	padding:0 5px 0 20px;
 }

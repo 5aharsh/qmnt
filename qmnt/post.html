@@ -3,7 +3,7 @@
 	<head>
 		<title>Qmnt</title>
         <link rel="stylesheet" href="qmnt/style.css"/>
-        <script src="qmnt/script/qmnt.js"></script>
+		<script src="qmnt/script/qmnt.js"></script>
 	</head>
 	<body style="font-family:arial;">
 		<div id="qmnting">
@@ -21,19 +21,23 @@
 		<script>
 			function postComment(posts){
 				var page = window.location.pathname;
-				post = posts[page];
-				if(post!=undefined)
-					for(var i=0;i<post.length;i++){
-						if(post[i]["website"]!="")
-							$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\"><a href=\""+post[i]["website"]+"\">"+ post[i]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
-						else
-							$('#qmnt-section').prepend("<details open><summary><span class=\"qmnt-user\">"+ post[i]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[i]["date"] +"</span></summary><blockquote>"+ post[i]["content"] +"</blockquote></details>");
+				var post = posts[page];
+				if(post!=undefined){
+					var l = Object.keys(post);
+					for(var i in l){
+						if(post[l[i]]["website"]!=""){
+							$("#qmnt-section").prepend("<details name=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\"><a href=\""+post[l[i]]["website"]+"\">"+ post[l[i]]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
+						}
+						else{
+							$("#qmnt-section").prepend("<details name=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\">"+ post[l[i]]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
+						}
 					}
+				}
 			}
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var posts = JSON.parse(this.responseText);
+			  	if (this.readyState == 4 && this.status == 200) {
+			    	var posts = JSON.parse(this.responseText);
 					postComment(posts);
 				}
 			};
