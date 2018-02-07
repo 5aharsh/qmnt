@@ -28,7 +28,7 @@
             $remail = $secret[$file[$page][$recipient]["id"].$file[$page][$recipient]["username"]];
             echo "mailed";
             $site = $_SERVER['HTTP_HOST'];
-            $msg = "You have got a reply on your comment! Checkout ar - http://".$site.$page.".";
+            $msg = "You have got a reply on your comment! Checkout at - http://".$site.$page.".";
             mail($remail, "You got a reply from ".$name, $msg, "From: <noreply@".$site.">");
         }
     }

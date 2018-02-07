@@ -25,11 +25,13 @@
 				if(post!=undefined){
 					var l = Object.keys(post);
 					for(var i in l){
+						if(post[l[i]]["content"].split(" ")[0].split("")[0]=="#")
+							post[l[i]]["content"]=post[l[i]]["content"].replace(post[l[i]]["content"].split(" ")[0], "<a href='#qmnt-"+post[l[i]]["content"].split(" ")[0].slice(1)+"' id='qmnt-anchor-link'>"+post[l[i]]["content"].split(" ")[0]+"</a>");
 						if(post[l[i]]["website"]!=""){
-							$("#qmnt-section").prepend("<details name=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\"><a href=\""+post[l[i]]["website"]+"\">"+ post[l[i]]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
+							$("#qmnt-section").prepend("<details id=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\"><a href=\""+post[l[i]]["website"]+"\">"+ post[l[i]]["username"] +"</a></span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
 						}
 						else{
-							$("#qmnt-section").prepend("<details name=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\">"+ post[l[i]]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
+							$("#qmnt-section").prepend("<details id=\"qmnt-"+l[i]+"\" open><summary><span class=\"qmnt-user\">"+ post[l[i]]["username"] +"</span> | <span class=\"qmnt-date\">"+ post[l[i]]["date"] +"</span><span id=\"qmnt-qmnid\">["+l[i]+"]</span></summary><blockquote>"+ post[l[i]]["content"] +"<hr><a id=\"qmnt-rep-button\" onclick=\"qmnt_reply(this)\" data-qmnt-id=\""+l[i]+"\" href=\"javascript:void(0)\">Reply</a></blockquote></details>");
 						}
 					}
 				}

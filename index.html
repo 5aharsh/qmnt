@@ -8,18 +8,32 @@
         <script src="qmnt/script/page.js"></script>
         <link rel="stylesheet" href="qmnt/website.css"/>
     </head>
-    <body style="font-family:georgia;">
+    <body>
         <center style="padding:5px;">
                 <h1 style="font-family:arcadeclassic;">My blog</h1>
                 <p>3 Sept, 2017 | 13:45</p>
-                <p>Content of the blog.</p>
-                <p style="width:70%;">
-                    An exhausting theology bores behind the hollow workload. The negotiable spectacular disguises the explanatory nonsense. The art reacts! A character fleshes the art. The drivel migrates past a portrayed exercise. Across a craft flies the leaded duck. The music unloads a folding scroll. The knight smells like any wound. Why can't the individual breathe? The decline inherits the listening twin. The caffeine dominates its intermittent continental behind the curriculum. A tube sneaks near a shape. The eagle bobs? The lunatic lark puzzles underneath an atheist.
-                </p>
+                <h3>qmnt - commenting library in PHP and JS</h3>
+                <div style="width:80%;">
+                    <p>
+                        <code>qmnt</code> is a library which can help you embed a comment section in your website. It is meant to be simple and lightweight in terms of back-end processing. Comments made by users are stored in a JSON file and any kind of action like fetching and submitting is done using a PHP script instead of any SQL server.
+                    </p>
+                    <p>
+                        Consider this page as a usual HTML page on any website. In order to embed a comment section using library here are the steps that are needed to be followed.
+                        <ol style="width:50%;text-align:left;">
+                            <li>Download the <code>qmnt</code> folder from source
+                            <li>Upload the folder in the root so that its easier to embed anywhere in multiple pages.
+                            <li>Embed 3 scripts the page using <code>script</code> tag - <code>jQuery</code>, <code>fingerprint2.js</code> and <code>qmnt.js</code> (all 3 are available in the library). In case you're already using jQuery in the page then there is no need to embed it again, in fact you can delete it from the library too.
+                            <li>Add a small CSS file named <code>website.css</code> with <code>style</code> (available in the library)
+                            <li>Add a <code>button</code> for showing comment and a <code>div</code> to display them. Below is the code -
+                                <pre>&lt;button id="qmnt-show"&gt;Show Comment&lt;/button&gt;</pre>
+                                <pre>&lt;div id="qmnt-list"&gt;&lt;/div&gt;</pre>
+                            Result would be something that you can see below.
+                        </ol>
+                    </p>
+                </div>
             <button id="qmnt-show">Show Comment</button>
             <br>
             <div id="qmnt-list"></div>
         </center>
-
     </body>
 </html>
