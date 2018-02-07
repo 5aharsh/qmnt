@@ -22,4 +22,4 @@ A lightweight embaddable commenting system written in JavaScript and PHP. No dat
 
 
 
-**Update (2 Feb, 2018)** - Repository went public.
+**Update (7 Feb, 2018)** - Repository went public.
