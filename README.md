@@ -1,6 +1,6 @@
 ## qmnt
 
-A lightweight embaddable commenting system written in JavaScript and PHP. No database setup required.
+A lightweight embeddable commenting system written in JavaScript and PHP. No database setup required.
 
 
 
